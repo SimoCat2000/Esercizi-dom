@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div>
+      <h1>To-do List</h1>
+      <input type="text" placeholder="..." />
+      <button onclick="addProduct()">Aggiungi</button>
+      <ul></ul>
+    </div>
+    <script src="./index.js">
+      
+      function addProduct() {
+
+  const input = document.querySelector('input');
+  const ul = document.querySelector('ul');
+
+  const task = input.value.trim();
+
+  if (task === '') return;
+
+  const li = document.createElement('li');
+  const checkbox = document.createElement('input');
+  checkbox.type = 'checkbox';
+
+  const span = document.createElement('span');
+  span.textContent = task;
+
+
+  li.appendChild(checkbox);
+  li.appendChild(span);
+
+  ul.appendChild(li);
+
+  input.value = '';
+}
+
+    </script>
+  </body
+  
