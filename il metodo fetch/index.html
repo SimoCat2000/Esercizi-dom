@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Carta - Il Signore degli Anelli</title>
+</head>
+<body>
+
+  <h1>Carta del Signore degli Anelli</h1>
+
+  <button onclick="caricaCartaCasuale()">Mostra un personaggio</button>
+
+  <div id="carta" style="margin-top: 20px;"></div>
+
+  <script>
+  
+    const cartePersonaggi = [
+      '01001', 
+      '01002', 
+      '01003', 
+      '01004', 
+      '01005', 
+      '01006', 
+      '12001', 
+      '143005' 
+    ];
+
+    function scegliCartaCasuale() {
+      const indice = Math.floor(Math.random() * cartePersonaggi.length);
+      return cartePersonaggi[indice];
+    }
+
+    async function caricaCartaCasuale() {
+      const cardCode = scegliCartaCasuale();
+      const url = `https://ringsdb.com/api/public/card/${cardCode}.json`;
+
+      try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('Errore nella richiesta');
+
+        const data = await response.json();
+        const nome = data.name;
+        const immagine = data.image_url;
+
+        const container = document.getElementById('carta');
+        container.innerHTML = `
+          <p><strong>Nome:</strong> ${nome}</p>
+          <img src="${immagine}" alt="${nome}">
+        `;
+      } catch (err) {
+        console.error(err);
+        document.getElementById('carta').textContent = 'Errore nel caricamento della carta.';
+      }
+    }
+  </script>
+
+</body>
+</html>
